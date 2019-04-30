@@ -13,6 +13,6 @@ public class ControlBoutton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        System.out.println("boutton appuyer");
     }
 }

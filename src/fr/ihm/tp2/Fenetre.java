@@ -33,16 +33,21 @@ public class Fenetre extends JFrame {
     public JButton bmoy;
     public JLabel tmoy;
 
+    public ControlBoutton controlB;
 
     public Fenetre() throws HeadlessException {
         initAttributs();
         ajoutWidgetV2();
+
+
 
         this.setTitle("AVG - Calculator");
         this.setResizable(true);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+
+        controlB = new ControlBoutton(this);
     }
 
     public void initAttributs(){
@@ -165,6 +170,7 @@ public class Fenetre extends JFrame {
             mainPan.add(pf1);
             mainPan.add(pf2);
 
+        bmoy.addActionListener(controlB);
         this.setContentPane(mainPan);
     }
 
