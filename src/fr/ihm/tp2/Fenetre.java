@@ -1,8 +1,11 @@
 package fr.ihm.tp2;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Fenetre extends JFrame {
 
@@ -34,12 +37,27 @@ public class Fenetre extends JFrame {
     public JLabel tmoy;
 
     public ControlBoutton controlB;
+    public ControlMenu controlM;
+
+    public JMenuItem itemInterface1;
+    public JMenuItem itemInterface2;
+    public JMenuItem itemAide;
+    public JMenuItem itemAPropos;
+
+
 
     public Fenetre() throws HeadlessException {
         initAttributs();
         ajoutWidgetV2();
 
+        BufferedImage icon = null;
 
+        try {
+            icon = ImageIO.read(Fenetre.class.getResource("/icone.gif"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        setIconImage(icon);
 
         this.setTitle("AVG - Calculator");
         this.setResizable(true);
@@ -49,14 +67,20 @@ public class Fenetre extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         controlB = new ControlBoutton(this);
+        pack();
     }
 
     public void initAttributs(){
         tf1 = new JTextField();
+            tf1.setColumns(6);
         tf2 = new JTextField();
+            tf2.setColumns(6);
         tf3 = new JTextField();
+            tf3.setColumns(6);
         tf4 = new JTextField();
+            tf4.setColumns(6);
         tf5 = new JTextField();
+            tf5.setColumns(6);
 
         rb11 = new JRadioButton("1");
         rb12 = new JRadioButton("2");
@@ -78,6 +102,120 @@ public class Fenetre extends JFrame {
 
         ControlBoutton buttonControl = new ControlBoutton(this);
         bmoy.addActionListener(buttonControl);
+
+        controlM = new ControlMenu(this);
+
+        itemInterface1 = new JMenuItem("Vue1");
+            itemInterface1.addActionListener(controlM);
+        itemInterface2 = new JMenuItem("Vue2");
+            itemInterface2.addActionListener(controlM);
+        itemAide = new JMenuItem("Comment ca marche ?");
+        itemAPropos = new JMenuItem("A propos");
+
+        try {
+            itemInterface1.setIcon(new ImageIcon(ImageIO.read(Fenetre.class.getResource("/iconeVersion1.gif"))));
+            itemInterface2.setIcon(new ImageIcon(ImageIO.read(Fenetre.class.getResource("/iconeVersion2.gif"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void creerMenu(){
+        JMenu menu = new JMenu("Options");
+            menu.add(itemInterface1);
+            menu.add(itemInterface2);
+            JMenu aide = new JMenu("Aide");
+                aide.add(itemAide);
+                aide.add(itemAPropos);
+            menu.add(aide);
+        JMenuBar barre = new JMenuBar();
+        barre.add(menu);
+
+
+        this.setJMenuBar(barre);
+    }
+
+    public void ajoutWidgetV1(){
+        JLabel t1 = new JLabel("Anglais");
+        JLabel t2 = new JLabel("Mathématiques");
+        JLabel t3 = new JLabel("Informatique");
+        JLabel t4 = new JLabel("Géographie");
+        JLabel topt = new JLabel("Optionnel");
+
+        //ON DECLARE LES BUTTON GROUPS
+        ButtonGroup bg1 = new ButtonGroup();
+            bg1.add(rb11);
+            bg1.add(rb12);
+            bg1.add(rb13);
+
+        ButtonGroup bg2 = new ButtonGroup();
+            bg2.add(rb21);
+            bg2.add(rb22);
+            bg2.add(rb23);
+
+        ButtonGroup bg3 = new ButtonGroup();
+            bg3.add(rb31);
+            bg3.add(rb32);
+            bg3.add(rb33);
+
+        ButtonGroup bg4 = new ButtonGroup();
+            bg4.add(rb41);
+            bg4.add(rb42);
+            bg4.add(rb43);
+
+        //On MET LES PANELS
+
+        JPanel p1 = new JPanel();
+            p1.add(t1);
+            p1.add(tf1);
+            p1.add(rb11);
+            p1.add(rb12);
+            p1.add(rb13);
+
+        JPanel p2 = new JPanel();
+            p2.add(t2);
+            p2.add(tf2);
+            p2.add(rb21);
+            p2.add(rb22);
+            p2.add(rb23);
+
+        JPanel p3 = new JPanel();
+            p3.add(t3);
+            p3.add(tf3);
+            p3.add(rb31);
+            p3.add(rb32);
+            p3.add(rb33);
+
+        JPanel p4 = new JPanel();
+            p4.add(t4);
+            p4.add(tf4);
+            p4.add(rb41);
+            p4.add(rb42);
+            p4.add(rb43);
+
+        JPanel p5 = new JPanel();
+            p5.add(dp);
+            p5.add(tf5);
+            p5.add(topt);
+
+        JPanel p6 = new JPanel();
+            p6.add(bmoy);
+            p6.add(tmoy);
+
+
+        JPanel pmain = new JPanel();
+            pmain.setLayout(new BoxLayout(pmain,BoxLayout.Y_AXIS));
+            pmain.add(p1);
+            pmain.add(p2);
+            pmain.add(p3);
+            pmain.add(p4);
+            pmain.add(p5);
+            pmain.add(cb);
+            pmain.add(p6);
+
+            setContentPane(pmain);
+            creerMenu();
     }
 
     public void ajoutWidgetV2(){
@@ -171,7 +309,7 @@ public class Fenetre extends JFrame {
             mainPan.add(pf1);
             mainPan.add(pf2);
 
-        bmoy.addActionListener(controlB);
+        creerMenu();
         this.setContentPane(mainPan);
     }
 

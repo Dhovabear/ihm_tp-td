@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Fen1 extends JFrame {
 
     public Fen1(){
-       initComponentV2();
+       initComponentV1();
 
         this.setTitle("BLALALA");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

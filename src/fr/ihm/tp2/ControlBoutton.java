@@ -88,7 +88,7 @@ public class ControlBoutton implements ActionListener {
         for (int i = 0 ; i < lim ; i++){
             System.out.println(notes[i]);
             if(isNumber(notes[i])){
-                erreur("ARRET DETRE CON ET MARQUE UN PUTAIN DE CHIFFRE!!!");
+                erreur("Veuillez entrez un nombre");
                 return;
             }
         }
