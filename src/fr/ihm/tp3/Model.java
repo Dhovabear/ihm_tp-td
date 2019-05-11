@@ -223,7 +223,8 @@ class Model {
      */
 
 
-    float calculerMoyenne() {
+    float
+    calculerMoyenne() {
 
         if( isCoeffActive ) {
 

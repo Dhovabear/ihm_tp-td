@@ -63,15 +63,19 @@ public class Fenetre extends JFrame {
         }
         setIconImage(icon);
 
+        iniFenetre();
+
+
+        pack();
+    }
+
+    private void iniFenetre() {
         this.setTitle("AVG - Calculator");
         this.setResizable(true);
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-
-        pack();
     }
 
     public void setControlBoutton(ControlBoutton cb){
