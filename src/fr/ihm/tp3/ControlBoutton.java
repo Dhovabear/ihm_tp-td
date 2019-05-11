@@ -94,8 +94,8 @@ public class ControlBoutton implements ActionListener {
         try {
             f.model.setCoeffAnglais(lireCoeff(f.rb11,f.rb12,f.rb13));
             f.model.setCoeffMaths(lireCoeff(f.rb21,f.rb22,f.rb23));
-            f.model.setCoeffGeo(lireCoeff(f.rb31,f.rb32,f.rb33));
-            f.model.setCoeffInfo(lireCoeff(f.rb41,f.rb42,f.rb43));
+            f.model.setCoeffInfo(lireCoeff(f.rb31,f.rb32,f.rb33));
+            f.model.setCoeffGeo(lireCoeff(f.rb41,f.rb42,f.rb43));
         } catch (CoeffOutOfBound coeffOutOfBound) {
             erreur("Veuillez entrer les coefficient !");
             return;
