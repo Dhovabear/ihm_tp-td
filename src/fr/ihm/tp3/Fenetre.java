@@ -71,10 +71,9 @@ public class Fenetre extends JFrame {
 
     private void iniFenetre() {
         this.setTitle("AVG - Calculator");
-        this.setResizable(true);
+        this.setResizable(false);
         this.pack();
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
@@ -358,6 +357,26 @@ public class Fenetre extends JFrame {
 
         creerMenu();
         this.setContentPane(mainPan);
+    }
+
+    public void changerPourVue1(){
+        getContentPane().removeAll();
+        ajoutWidgetV1();
+        pack();
+    }
+
+    public void changerPourVue2(){
+        getContentPane().removeAll();
+        ajoutWidgetV2();
+        pack();
+    }
+
+    public void display(){
+        setVisible(true);
+    }
+
+    public void undisplay(){
+        setVisible(false);
     }
 
 }

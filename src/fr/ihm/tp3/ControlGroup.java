@@ -6,7 +6,8 @@ public class ControlGroup {
         Fenetre fen = new Fenetre(model);
 
         ControlMenu cm = new ControlMenu(fen);
-        ControlBoutton cb = new ControlBoutton(fen);
+        ControlBoutton cb = new ControlBoutton(fen,model);
 
+        fen.display();
     }
 }

@@ -1,28 +1,27 @@
 package fr.ihm.tp3;
 
-import fr.ihm.tp3.Fenetre;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ControlBoutton implements ActionListener {
 
-    Fenetre f;
+    private Fenetre m_f;
+    private Model m_model;
 
-    public ControlBoutton(Fenetre f) {
-        this.f = f;
+    public ControlBoutton(Fenetre f , Model m) {
+        this.m_f = f;
+        this.m_model = m;
         f.setControlBoutton(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(isNumber(f.tf1.getText())){
+
+        if(isNumber(m_f.tf1.getText())){
             try {
-                f.model.setNoteAnglais(Float.parseFloat(f.tf1.getText()));
+                m_model.setNoteAnglais(Float.parseFloat(m_f.tf1.getText()));
             } catch (NoteOutOfBound noteOutOfBound) {
                 erreur("Veuillez entrer une note entre 0 et 20");
                 return;
@@ -32,9 +31,9 @@ public class ControlBoutton implements ActionListener {
             return;
         }
 
-        if(isNumber(f.tf2.getText())){
+        if(isNumber(m_f.tf2.getText())){
             try {
-                f.model.setNoteMaths(Float.parseFloat(f.tf2.getText()));
+                m_model.setNoteMaths(Float.parseFloat(m_f.tf2.getText()));
             } catch (NoteOutOfBound noteOutOfBound) {
                 erreur("Veuillez entrer une note entre 0 et 20");
                 return;
@@ -44,9 +43,9 @@ public class ControlBoutton implements ActionListener {
             return;
         }
 
-        if(isNumber(f.tf3.getText())){
+        if(isNumber(m_f.tf3.getText())){
             try {
-                f.model.setNoteInfo(Float.parseFloat(f.tf3.getText()));
+                m_model.setNoteInfo(Float.parseFloat(m_f.tf3.getText()));
             } catch (NoteOutOfBound noteOutOfBound) {
                 erreur("Veuillez entrer une note entre 0 et 20");
                 return;
@@ -56,9 +55,9 @@ public class ControlBoutton implements ActionListener {
             return;
         }
 
-        if(isNumber(f.tf4.getText())){
+        if(isNumber(m_f.tf4.getText())){
             try {
-                f.model.setNoteGeo(Float.parseFloat(f.tf4.getText()));
+                m_model.setNoteGeo(Float.parseFloat(m_f.tf4.getText()));
             } catch (NoteOutOfBound noteOutOfBound) {
                 erreur("Veuillez entrer une note entre 0 et 20");
                 return;
@@ -68,11 +67,11 @@ public class ControlBoutton implements ActionListener {
             return;
         }
 
-        if(f.dp.getSelectedIndex() != 0){
-            if(isNumber(f.tf5.getText())){
+        if(m_f.dp.getSelectedIndex() != 0){
+            if(isNumber(m_f.tf5.getText())){
                 try {
-                    f.model.setNumOption((int)f.dp.getSelectedIndex());
-                    f.model.setNoteOption(Float.parseFloat(f.tf5.getText()));
+                    m_model.setNumOption((int) m_f.dp.getSelectedIndex());
+                    m_model.setNoteOption(Float.parseFloat(m_f.tf5.getText()));
 
                 } catch (NumOptionOutOfBound numOptionOutOfBound) {
                     erreur("Une erreur est survenue avec l'option choisit");
@@ -89,24 +88,24 @@ public class ControlBoutton implements ActionListener {
 
 
 
-        f.model.setCoeffActive(f.cb.isSelected());
+        m_model.setCoeffActive(m_f.cb.isSelected());
 
         try {
-            f.model.setCoeffAnglais(lireCoeff(f.rb11,f.rb12,f.rb13));
-            f.model.setCoeffMaths(lireCoeff(f.rb21,f.rb22,f.rb23));
-            f.model.setCoeffInfo(lireCoeff(f.rb31,f.rb32,f.rb33));
-            f.model.setCoeffGeo(lireCoeff(f.rb41,f.rb42,f.rb43));
+            m_model.setCoeffAnglais(lireCoeff(m_f.rb11, m_f.rb12, m_f.rb13));
+            m_model.setCoeffMaths(lireCoeff(m_f.rb21, m_f.rb22, m_f.rb23));
+            m_model.setCoeffInfo(lireCoeff(m_f.rb31, m_f.rb32, m_f.rb33));
+            m_model.setCoeffGeo(lireCoeff(m_f.rb41, m_f.rb42, m_f.rb43));
         } catch (CoeffOutOfBound coeffOutOfBound) {
             erreur("Veuillez entrer les coefficient !");
             return;
         }
 
 
-        f.tmoy.setText(Float.toString(f.model.calculerMoyenne()));
+        m_f.tmoy.setText(Float.toString(m_model.calculerMoyenne()));
     }
 
     public void erreur(String description){
-        JOptionPane.showMessageDialog(f,description,"Erreur",0);
+        JOptionPane.showMessageDialog(m_f,description,"Erreur",0);
         return;
     }
 

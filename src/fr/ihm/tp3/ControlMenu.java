@@ -20,13 +20,9 @@ public class ControlMenu implements ActionListener {
         String txt = ((JMenuItem)e.getSource()).getText();
 
         if(txt.equals("Vue1")){
-            fen.getContentPane().removeAll();
-            fen.ajoutWidgetV1();
-            fen.pack();
+            fen.changerPourVue1();
         }else if(txt.equals("Vue2")){
-            fen.getContentPane().removeAll();
-            fen.ajoutWidgetV2();
-            fen.pack();
+            fen.changerPourVue2();
         }
     }
 }
